@@ -253,35 +253,48 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
-%hook TTKSettingsBaseCellPlugin
-- (void)didSelectItemAtIndex:(NSInteger)index {
-    if ([self.itemModel.identifier isEqualToString:@"bhtiktok_settings"]) {
-        UINavigationController *BHTikTokSettings = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
-        [topMostController() presentViewController:BHTikTokSettings animated:true completion:nil];
-    } else {
-        return %orig;
-    }
+@interface BHEntryTarget : NSObject <UIGestureRecognizerDelegate>
+@property (nonatomic, copy) void (^action)(void);
+- (void)fire;
+@end
+@implementation BHEntryTarget
+- (void)fire { if (self.action) self.action(); }
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gr shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)other { return YES; }
+@end
+
+static BHEntryTarget *bh_entryTarget = nil;
+static UIWindow *bh_entryWindow = nil;
+static dispatch_source_t bh_entrySrc = nil;
+
+static void bh_openSettingsPanel(void) {
+    UIViewController *top = topMostController();
+    if (!top) return;
+    UINavigationController *bhSettings = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    [top presentViewController:bhSettings animated:YES completion:nil];
 }
-%end
 
-%hook AWESettingsNormalSectionViewModel
-- (void)viewDidLoad {
-    %orig;
-    if ([self.sectionIdentifier isEqualToString:@"account"]) {
-        TTKSettingsBaseCellPlugin *BHTikTokSettingsPluginCell = [[%c(TTKSettingsBaseCellPlugin) alloc] initWithPluginContext:self.context];
-
-        AWESettingItemModel *BHTikTokSettingsItemModel = [[%c(AWESettingItemModel) alloc] initWithIdentifier:@"bhtiktok_settings"];
-        [BHTikTokSettingsItemModel setTitle:@"BHTikTok++ settings"];
-        [BHTikTokSettingsItemModel setDetail:@"BHTikTok++ settings"];
-        [BHTikTokSettingsItemModel setIconImage:[UIImage systemImageNamed:@"gear"]];
-        [BHTikTokSettingsItemModel setType:99];
-
-        [BHTikTokSettingsPluginCell setItemModel:BHTikTokSettingsItemModel];
-
-        [self insertModel:BHTikTokSettingsPluginCell atIndex:0 animated:true];
+// entry: 3-finger double-tap on key window, independent of TikTok settings UI
+static void bh_ensureEntryGesture(void) {
+    UIWindow *w = nil;
+    for (UIWindow *win in UIApplication.sharedApplication.windows)
+        if (win.isKeyWindow) { w = win; break; }
+    if (!w) w = UIApplication.sharedApplication.windows.firstObject;
+    if (!w || w == bh_entryWindow) return;
+    if (!bh_entryTarget) {
+        bh_entryTarget = [BHEntryTarget new];
+        bh_entryTarget.action = ^{ bh_openSettingsPanel(); };
     }
+    UITapGestureRecognizer *g = [[UITapGestureRecognizer alloc] initWithTarget:bh_entryTarget action:@selector(fire)];
+    g.numberOfTouchesRequired = 3;
+    g.numberOfTapsRequired = 2;
+    g.cancelsTouchesInView = NO;
+    g.delaysTouchesBegan = NO;
+    g.delaysTouchesEnded = NO;
+    g.delegate = bh_entryTarget;
+    [w addGestureRecognizer:g];
+    bh_entryWindow = w;
+    NSLog(@"[BHTikTok++] entry gesture installed on window %@", w);
 }
-%end
 
 %hook SparkViewController // alwaysOpenSafari
 - (void)viewWillAppear:(BOOL)animated {
@@ -1881,4 +1894,8 @@ static BOOL isAuthenticationShowed = FALSE;
         @"/bin/sh", @"/bin/bash",
     ];
     %init;
+    bh_entrySrc = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_event_handler(bh_entrySrc, ^{ bh_ensureEntryGesture(); });
+    dispatch_source_set_timer(bh_entrySrc, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC), NSEC_PER_SEC, 100*NSEC_PER_MSEC);
+    dispatch_resume(bh_entrySrc);
 }
