@@ -18,7 +18,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     self.speeds = @[@0.5, @1.0, @1.5, @2.0];
-    self.title = @"Select Speed";
+    self.title = @"选择倍速";
     self.staticTable = [[UITableView alloc] initWithFrame:CGRectZero];
     self.staticTable.translatesAutoresizingMaskIntoConstraints = NO;
     [self.staticTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
@@ -53,7 +53,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:selectedSpeed forKey:@"playback_speed"];
     [defaults synchronize];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Live Option Selected" message:[NSString stringWithFormat:@"You selected: %@", selectedSpeed]
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"直播按钮功能已选择" message:[NSString stringWithFormat:@"已选择：%@", selectedSpeed]
                                                             preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:okAction];

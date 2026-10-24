@@ -11,7 +11,7 @@
     [self.view addSubview:blurView];
     
     UIButton *authenticateButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 200, 60)];
-    [authenticateButton setTitle:@"Authenticate" forState:UIControlStateNormal];
+    [authenticateButton setTitle:@"验证身份" forState:UIControlStateNormal];
     authenticateButton.center = self.view.center;
     [authenticateButton addTarget:self action:@selector(authenticateButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:authenticateButton];
@@ -28,7 +28,7 @@
     NSError *error = nil;
     
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error]) {
-        NSString *reason = @"Identify yourself!";
+        NSString *reason = @"请验证身份";
         
         [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:reason reply:^(BOOL success, NSError *authenticationError) {
             dispatch_async(dispatch_get_main_queue(), ^{

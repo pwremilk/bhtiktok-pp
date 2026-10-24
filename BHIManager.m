@@ -194,13 +194,13 @@
         } else if ([imageExtensions containsObject:fileextension]) {
             [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto fileURL:newFilePath options:options];
         } else {
-            NSLog(@"Unsupported file type: %@", fileextension);
+            NSLog(@"不支持的文件类型：%@", fileextension);
         }
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
         if (success) {
-            NSLog(@"Media saved to Camera Roll successfully.");
+            NSLog(@"媒体已保存到相册。");
         } else {
-            NSLog(@"Error saving media to Camera Roll: %@", error);
+            NSLog(@"保存媒体到相册出错：%@", error);
         }
     }];
 }

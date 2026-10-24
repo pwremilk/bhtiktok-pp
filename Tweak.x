@@ -3,7 +3,7 @@
 NSArray *jailbreakPaths;
 
 static void showConfirmation(void (^okHandler)(void)) {
-  [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"Are you sure?" image:nil actionButtonTitle:@"Yes" cancelButtonTitle:@"No" actionBlock:^{
+  [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"确定要执行此操作吗？" image:nil actionButtonTitle:@"确定" cancelButtonTitle:@"取消" actionBlock:^{
     okHandler();
   } cancelBlock:nil];
 }
@@ -183,7 +183,7 @@ static BOOL isAuthenticationShowed = FALSE;
         NSNumber *userVideoCount = [user visibleVideosCount];
         if (userVideoCount){
             UILabel *userVideoCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,2,100,20.5)];
-            userVideoCountLabel.text = [NSString stringWithFormat:@"Video Count: %@", userVideoCount];
+            userVideoCountLabel.text = [NSString stringWithFormat:@"视频数：%@", userVideoCount];
             userVideoCountLabel.font = [UIFont systemFontOfSize:9.0];
             [self addSubview:userVideoCountLabel];
         }
@@ -205,16 +205,16 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"Save profile image" description:@"Do you want to save this image" image:nil actionButtonTitle:@"Yes" cancelButtonTitle:@"No" actionBlock:^{
+        [%c(AWEUIAlertView) showAlertWithTitle:@"保存头像" description:@"要保存这张图片吗？" image:nil actionButtonTitle:@"确定" cancelButtonTitle:@"取消" actionBlock:^{
             UIImageWriteToSavedPhotosAlbum([self bd_baseImage], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
   } cancelBlock:nil];
     }
 }
 %new - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (error) {
-        NSLog(@"Error saving image: %@", error.localizedDescription);
+        NSLog(@"保存图片出错：%@", error.localizedDescription);
     } else {
-        NSLog(@"Image successfully saved to Photos app");
+        NSLog(@"图片已保存到相册");
     }
 }
 %end
@@ -243,7 +243,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         NSString *profileDescription = [self text];
-        [%c(AWEUIAlertView) showAlertWithTitle:@"Copy bio" description:@"Do you want to copy this text to clipboard" image:nil actionButtonTitle:@"Yes" cancelButtonTitle:@"No" actionBlock:^{
+        [%c(AWEUIAlertView) showAlertWithTitle:@"复制简介" description:@"要复制这段文字到剪贴板吗？" image:nil actionButtonTitle:@"确定" cancelButtonTitle:@"取消" actionBlock:^{
              if (profileDescription) {
                                                                     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                                                                     pasteboard.string = profileDescription;
@@ -1122,7 +1122,7 @@ static void bh_ensureEntryGesture(void) {
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
         self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"Downloading";
+        self.hud.textLabel.text = @"下载中";
         [self.hud showInView:topMostController().view];
     }
 }
@@ -1135,7 +1135,7 @@ static void bh_ensureEntryGesture(void) {
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
         self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"Downloading";
+        self.hud.textLabel.text = @"下载中";
         [self.hud showInView:topMostController().view];
     }
 }
@@ -1151,7 +1151,7 @@ static void bh_ensureEntryGesture(void) {
                     [dwManager downloadFileWithURL:downloadableURL];
                     [dwManager setDelegate:self];
                     self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-                    self.hud.textLabel.text = @"Downloading";
+                    self.hud.textLabel.text = @"下载中";
                      [self.hud showInView:topMostController().view];
                 }
             
@@ -1176,7 +1176,7 @@ static void bh_ensureEntryGesture(void) {
             [dwManager setDelegate:self];
             [dwManager downloadFiles:fileURLs];
             self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-            self.hud.textLabel.text = @"Downloading";
+            self.hud.textLabel.text = @"下载中";
             [self.hud showInView:topMostController().view];
 
 }
@@ -1189,7 +1189,7 @@ static void bh_ensureEntryGesture(void) {
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
         self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"Downloading";
+        self.hud.textLabel.text = @"下载中";
         [self.hud showInView:topMostController().view];
     }
 }
@@ -1199,7 +1199,7 @@ static void bh_ensureEntryGesture(void) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = [downloadableURL absoluteString];
     } else {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"Could Not Copy Music." image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
+        [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"无法复制音乐。" image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
     }
 }
 %new - (void)copyVideo:(AWEAwemeBaseViewController *)rootVC {
@@ -1208,7 +1208,7 @@ static void bh_ensureEntryGesture(void) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = [downloadableURL absoluteString];
     } else {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"The video dosen't have music to download." image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
+        [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"该视频没有可下载的音乐。" image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
     }
 }
 %new - (void)copyDecription:(AWEAwemeBaseViewController *)rootVC {
@@ -1217,52 +1217,52 @@ static void bh_ensureEntryGesture(void) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = video_description;
     } else {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"The video dosen't have music to download." image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
+        [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"该视频没有可下载的音乐。" image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
     }
 }
 %new - (void) downloadButtonHandler:(UIButton *)sender {
     AWEAwemeBaseViewController *rootVC = self.viewController;
     if ([rootVC isKindOfClass:%c(AWEFeedCellViewController)]) {
 
-         UIAction *action1 = [UIAction actionWithTitle:@"Download Video"
+         UIAction *action1 = [UIAction actionWithTitle:@"下载视频"
                                             image:[UIImage systemImageNamed:@"film"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadVideo:rootVC];
     }];
-        UIAction *action0 = [UIAction actionWithTitle:@"Download HD Video"
+        UIAction *action0 = [UIAction actionWithTitle:@"下载高清视频"
                                             image:[UIImage systemImageNamed:@"film"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadHDVideo:rootVC];
     }];
-    UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
+    UIAction *action2 = [UIAction actionWithTitle:@"下载音乐"
                                             image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadMusic:rootVC];
     }];
-    UIAction *action3 = [UIAction actionWithTitle:@"Copy Music link"
+    UIAction *action3 = [UIAction actionWithTitle:@"复制音乐链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyMusic:rootVC];
     }];
-    UIAction *action4 = [UIAction actionWithTitle:@"Copy Video link"
+    UIAction *action4 = [UIAction actionWithTitle:@"复制视频链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyVideo:rootVC];
     }];
-    UIAction *action5 = [UIAction actionWithTitle:@"Copy Decription"
+    UIAction *action5 = [UIAction actionWithTitle:@"复制文案"
                                             image:[UIImage systemImageNamed:@"note.text"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyDecription:rootVC];
     }];
-    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"Downloads Menu"
+    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"下载菜单"
                                         children:@[action1, action0,action2]];
-    UIMenu *copyMenu = [UIMenu menuWithTitle:@"Copy Menu"
+    UIMenu *copyMenu = [UIMenu menuWithTitle:@"复制"
                                         children:@[action3, action4, action5]];
     UIMenu *mainMenu = [UIMenu menuWithTitle:@"" children:@[downloadMenu, copyMenu]];
     [sender setMenu:mainMenu];
@@ -1274,7 +1274,7 @@ static void bh_ensureEntryGesture(void) {
         unsigned long photosCount = [photos count];
         NSMutableArray <UIAction *> *photosActions = [NSMutableArray array];
             for (int i = 0; i < photosCount; i++) {
-        NSString *title = [NSString stringWithFormat:@"Download Photo %d", i+1];
+        NSString *title = [NSString stringWithFormat:@"下载图片 %d", i+1];
         UIAction *action = [UIAction actionWithTitle:title
                                                image:[UIImage systemImageNamed:@"photo.fill"]
                                           identifier:nil
@@ -1284,42 +1284,42 @@ static void bh_ensureEntryGesture(void) {
         [photosActions addObject:action];
 
     }
-    UIAction *allPhotosAction = [UIAction actionWithTitle:@"Download All Photos"
+    UIAction *allPhotosAction = [UIAction actionWithTitle:@"下载全部图片"
                                             image:[UIImage systemImageNamed:@"photo.fill"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadPhotos:rootVC];
     }];
     [photosActions addObject:allPhotosAction];
-    UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
+    UIAction *action2 = [UIAction actionWithTitle:@"下载音乐"
                                             image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadMusic:rootVC];
     }];
-    UIAction *action3 = [UIAction actionWithTitle:@"Copy Music link"
+    UIAction *action3 = [UIAction actionWithTitle:@"复制音乐链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyMusic:rootVC];
     }];
-    UIAction *action4 = [UIAction actionWithTitle:@"Copy Video link"
+    UIAction *action4 = [UIAction actionWithTitle:@"复制视频链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyVideo:rootVC];
     }];
-    UIAction *action5 = [UIAction actionWithTitle:@"Copy Decription"
+    UIAction *action5 = [UIAction actionWithTitle:@"复制文案"
                                             image:[UIImage systemImageNamed:@"note.text"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyDecription:rootVC];
     }];
-    UIMenu *PhotosMenu = [UIMenu menuWithTitle:@"Download Photos Menu"
+    UIMenu *PhotosMenu = [UIMenu menuWithTitle:@"下载图片菜单"
                                         children:photosActions];
-    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"Downloads Menu"
+    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"下载菜单"
                                         children:@[action2]];
-    UIMenu *copyMenu = [UIMenu menuWithTitle:@"Copy Menu"
+    UIMenu *copyMenu = [UIMenu menuWithTitle:@"复制"
                                         children:@[action3, action4, action5]];
     UIMenu *mainMenu = [UIMenu menuWithTitle:@"" children:@[PhotosMenu, downloadMenu, copyMenu]];
     [sender setMenu:mainMenu];
@@ -1331,7 +1331,7 @@ static void bh_ensureEntryGesture(void) {
         unsigned long photosCount = [photos count];
         NSMutableArray <UIAction *> *photosActions = [NSMutableArray array];
             for (int i = 0; i < photosCount; i++) {
-        NSString *title = [NSString stringWithFormat:@"Download Photo %d", i+1];
+        NSString *title = [NSString stringWithFormat:@"下载图片 %d", i+1];
         UIAction *action = [UIAction actionWithTitle:title
                                                image:[UIImage systemImageNamed:@"photo.fill"]
                                           identifier:nil
@@ -1341,42 +1341,42 @@ static void bh_ensureEntryGesture(void) {
         [photosActions addObject:action];
 
     }
-        UIAction *allPhotosAction = [UIAction actionWithTitle:@"Download Photos"
+        UIAction *allPhotosAction = [UIAction actionWithTitle:@"下载图片"
                                             image:[UIImage systemImageNamed:@"photo.fill"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadPhotos:rootVC];
     }];
     [photosActions addObject:allPhotosAction];
-    UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
+    UIAction *action2 = [UIAction actionWithTitle:@"下载音乐"
                                             image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadMusic:rootVC];
     }];
-    UIAction *action3 = [UIAction actionWithTitle:@"Copy Music link"
+    UIAction *action3 = [UIAction actionWithTitle:@"复制音乐链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyMusic:rootVC];
     }];
-    UIAction *action4 = [UIAction actionWithTitle:@"Copy Video link"
+    UIAction *action4 = [UIAction actionWithTitle:@"复制视频链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyVideo:rootVC];
     }];
-    UIAction *action5 = [UIAction actionWithTitle:@"Copy Decription"
+    UIAction *action5 = [UIAction actionWithTitle:@"复制文案"
                                             image:[UIImage systemImageNamed:@"note.text"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyDecription:rootVC];
     }];
-    UIMenu *PhotosMenu = [UIMenu menuWithTitle:@"Download Photos Menu"
+    UIMenu *PhotosMenu = [UIMenu menuWithTitle:@"下载图片菜单"
                                         children:photosActions];
-    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"Downloads Menu"
+    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"下载菜单"
                                         children:@[action2]];
-    UIMenu *copyMenu = [UIMenu menuWithTitle:@"Copy Menu"
+    UIMenu *copyMenu = [UIMenu menuWithTitle:@"复制"
                                         children:@[action3, action4, action5]];
     UIMenu *mainMenu = [UIMenu menuWithTitle:@"" children:@[PhotosMenu, downloadMenu, copyMenu]];
     [sender setMenu:mainMenu];
@@ -1523,7 +1523,7 @@ static void bh_ensureEntryGesture(void) {
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
         self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"Downloading";
+        self.hud.textLabel.text = @"下载中";
         [self.hud showInView:topMostController().view];
     }
 }
@@ -1536,7 +1536,7 @@ static void bh_ensureEntryGesture(void) {
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
         self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"Downloading";
+        self.hud.textLabel.text = @"下载中";
         [self.hud showInView:topMostController().view];
     }
 }
@@ -1549,7 +1549,7 @@ static void bh_ensureEntryGesture(void) {
         [dwManager downloadFileWithURL:downloadableURL];
         [dwManager setDelegate:self];
         self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"Downloading";
+        self.hud.textLabel.text = @"下载中";
         [self.hud showInView:topMostController().view];
     }
 }
@@ -1559,7 +1559,7 @@ static void bh_ensureEntryGesture(void) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = [downloadableURL absoluteString];
     } else {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"The video dosen't have music to download." image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
+        [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"该视频没有可下载的音乐。" image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
     }
 }
 %new - (void)copyVideo:(AWEAwemeBaseViewController *)rootVC {
@@ -1568,7 +1568,7 @@ static void bh_ensureEntryGesture(void) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = [downloadableURL absoluteString];
     } else {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"The video dosen't have music to download." image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
+        [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"该视频没有可下载的音乐。" image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
     }
 }
 %new - (void)copyDecription:(AWEAwemeBaseViewController *)rootVC {
@@ -1577,52 +1577,52 @@ static void bh_ensureEntryGesture(void) {
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = video_description;
     } else {
-        [%c(AWEUIAlertView) showAlertWithTitle:@"BHTikTok, Hi" description:@"The video dosen't have music to download." image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
+        [%c(AWEUIAlertView) showAlertWithTitle:@"确认操作" description:@"该视频没有可下载的音乐。" image:nil actionButtonTitle:@"OK" cancelButtonTitle:nil actionBlock:nil cancelBlock:nil];
     }
 }
 %new - (void) downloadButtonHandler:(UIButton *)sender {
     AWEAwemeBaseViewController *rootVC = self.viewController;
     if ([rootVC.interactionController isKindOfClass:%c(TTKFeedInteractionLegacyMainContainerElement)]) {
 
-     UIAction *action1 = [UIAction actionWithTitle:@"Download Video"
+     UIAction *action1 = [UIAction actionWithTitle:@"下载视频"
                                             image:[UIImage systemImageNamed:@"film"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadVideo:rootVC];
     }];
-    UIAction *action0 = [UIAction actionWithTitle:@"Download HD Video"
+    UIAction *action0 = [UIAction actionWithTitle:@"下载高清视频"
                                             image:[UIImage systemImageNamed:@"film"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadHDVideo:rootVC];
     }];
-    UIAction *action2 = [UIAction actionWithTitle:@"Download Music"
+    UIAction *action2 = [UIAction actionWithTitle:@"下载音乐"
                                             image:[UIImage systemImageNamed:@"music.note"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self downloadMusic:rootVC];
     }];
-    UIAction *action3 = [UIAction actionWithTitle:@"Copy Music link"
+    UIAction *action3 = [UIAction actionWithTitle:@"复制音乐链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyMusic:rootVC];
     }];
-    UIAction *action4 = [UIAction actionWithTitle:@"Copy Video link"
+    UIAction *action4 = [UIAction actionWithTitle:@"复制视频链接"
                                             image:[UIImage systemImageNamed:@"link"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyVideo:rootVC];
     }];
-    UIAction *action5 = [UIAction actionWithTitle:@"Copy Decription"
+    UIAction *action5 = [UIAction actionWithTitle:@"复制文案"
                                             image:[UIImage systemImageNamed:@"note.text"]
                                        identifier:nil
                                           handler:^(__kindof UIAction * _Nonnull action) {
                                             [self copyDecription:rootVC];
     }];
-    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"Downloads Menu"
+    UIMenu *downloadMenu = [UIMenu menuWithTitle:@"下载菜单"
                                         children:@[action1, action0,action2]];
-    UIMenu *copyMenu = [UIMenu menuWithTitle:@"Copy Menu"
+    UIMenu *copyMenu = [UIMenu menuWithTitle:@"复制"
                                         children:@[action3, action4, action5]];
     UIMenu *mainMenu = [UIMenu menuWithTitle:@"" children:@[downloadMenu, copyMenu]];
     [sender setMenu:mainMenu];

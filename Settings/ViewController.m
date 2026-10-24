@@ -22,7 +22,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     
-    self.title = @"BHTikTok++ Settings";
+    self.title = @"BHTikTok++ 设置";
     self.staticTable = [[UITableView alloc] initWithFrame:CGRectZero ];
     self.staticTable.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.staticTable];
@@ -52,22 +52,22 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return @"Feed";
+            return @"推荐流";
         case 1:
-            return @"Profile";
+            return @"个人主页";
         case 2:
-            return @"Confirm";
+            return @"确认弹窗";
         case 3:
-            return @"Other";
+            return @"其他";
         case 4:
-            return @"Region";
+            return @"地区";
             break;
         case 5:
-            return @"Live Button Function";
+            return @"直播按钮功能";
         case 6:
-            return @"Playback Speed";
+            return @"倍速播放";
         case 7:
-            return @"Developer";
+            return @"开发者";
         default:
             break;
     }
@@ -101,64 +101,64 @@
     if (indexPath.section == 0) {
         switch (indexPath.row) {
             case 0:
-                return [self createSwitchCellWithTitle:@"Hide Ads"
-                                                Detail:@"Hide all ads from the app"
+                return [self createSwitchCellWithTitle:@"移除广告"
+                                                Detail:@"隐藏应用内全部广告"
                                                    Key:@"hide_ads"];
             case 1:
-                return [self createSwitchCellWithTitle:@"Download Button"
-                                                Detail:@"Enable download button for videos"
+                return [self createSwitchCellWithTitle:@"下载按钮"
+                                                Detail:@"为视频启用下载按钮"
                                                    Key:@"download_button"];
             case 2:
-                return [self createSwitchCellWithTitle:@"Share Sheet"
-                                                Detail:@"Enable sharing options in share sheet"
+                return [self createSwitchCellWithTitle:@"分享面板"
+                                                Detail:@"在分享面板显示扩展选项"
                                                    Key:@"share_sheet"];
             case 3:
-                return [self createSwitchCellWithTitle:@"Remove Watermark"
-                                                Detail:@"Remove the TikTok watermark from videos"
+                return [self createSwitchCellWithTitle:@"去水印"
+                                                Detail:@"去除视频中的 TikTok 水印"
                                                    Key:@"remove_watermark"];
             case 4:
-                return [self createSwitchCellWithTitle:@"Show/Hide UI Button"
-                                                Detail:@"Show or hide the UI button"
+                return [self createSwitchCellWithTitle:@"显示/隐藏视频页按钮"
+                                                Detail:@"在视频页面显示或隐藏按钮"
                                                    Key:@"remove_elements_button"];
             case 5:
-                return [self createSwitchCellWithTitle:@"Stop Playback"
-                                                Detail:@"Stop video playback automatically"
+                return [self createSwitchCellWithTitle:@"自动停顿"
+                                                Detail:@"自动停止视频播放"
                                                    Key:@"stop_play"];
             case 6:
-                return [self createSwitchCellWithTitle:@"Auto Play Next Video"
-                                                Detail:@"Automatically play the next video"
+                return [self createSwitchCellWithTitle:@"自动连播"
+                                                Detail:@"自动播放下一个视频"
                                                    Key:@"auto_play"];
             case 7:
-                return [self createSwitchCellWithTitle:@"Show Progress Bar"
-                                                Detail:@"Display progress bar on video playback"
+                return [self createSwitchCellWithTitle:@"显示进度条"
+                                                Detail:@"视频播放时显示进度条"
                                                    Key:@"show_porgress_bar"];
             case 8:
-                return [self createSwitchCellWithTitle:@"Transparent Comments"
-                                                Detail:@"Make comments transparent"
+                return [self createSwitchCellWithTitle:@"透明评论"
+                                                Detail:@"评论设为透明"
                                                    Key:@"transparent_commnet"];
             case 9:
-                return [self createSwitchCellWithTitle:@"Show Usernames"
-                                                Detail:@"Display usernames on videos"
+                return [self createSwitchCellWithTitle:@"显示用户名"
+                                                Detail:@"视频上显示用户名"
                                                    Key:@"show_username"];
             case 10:
-                return [self createSwitchCellWithTitle:@"Disable Sensitive Content"
-                                                Detail:@"Disable sensitive content filter"
+                return [self createSwitchCellWithTitle:@"关闭敏感内容限制"
+                                                Detail:@"关闭敏感内容过滤"
                                                    Key:@"disable_unsensitive"];
             case 11:
-                return [self createSwitchCellWithTitle:@"Disable Warnings"
-                                                Detail:@"Disable TikTok warnings"
+                return [self createSwitchCellWithTitle:@"禁用警告"
+                                                Detail:@"禁用 TikTok 警告提示"
                                                    Key:@"disable_warnings"];
             case 12:
-                return [self createSwitchCellWithTitle:@"Disable Live Streaming"
-                                                Detail:@"Disable live video streaming"
+                return [self createSwitchCellWithTitle:@"禁用直播"
+                                                Detail:@"禁用直播推流功能"
                                                    Key:@"disable_live"];
             case 13:
-                return [self createSwitchCellWithTitle:@"Skip Recommendations"
-                                                Detail:@"Skip recommended videos"
+                return [self createSwitchCellWithTitle:@"跳过推荐"
+                                                Detail:@"自动跳过推荐视频"
                                                    Key:@"skip_recommnedations"];
             case 14:
-                return [self createSwitchCellWithTitle:@"Upload Region"
-                                                Detail:@"Show Upload Region Flag Next to Username"
+                return [self createSwitchCellWithTitle:@"发布地区"
+                                                Detail:@"用户名旁显示发布地区旗帜"
                                                    Key:@"upload_region"];
             default:
                 break;
@@ -166,20 +166,20 @@
     } else if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
-                return [self createSwitchCellWithTitle:@"Profile Save"
-                                                Detail:@"Save profile details to clipboard"
+                return [self createSwitchCellWithTitle:@"保存头像"
+                                                Detail:@"将资料详情复制到剪贴板"
                                                    Key:@"save_profile"];
             case 1:
-                return [self createSwitchCellWithTitle:@"Profile Copy"
-                                                Detail:@"Copy profile information"
+                return [self createSwitchCellWithTitle:@"复制资料"
+                                                Detail:@"复制资料信息"
                                                    Key:@"copy_profile_information"];
             case 2:
-                return [self createSwitchCellWithTitle:@"Video Like Count"
-                                                Detail:@"Show the number of likes on videos"
+                return [self createSwitchCellWithTitle:@"视频点赞数"
+                                                Detail:@"显示视频点赞数"
                                                    Key:@"video_like_count"];
             case 3:
-                return [self createSwitchCellWithTitle:@"Video Upload Date"
-                                                Detail:@"Show the date videos were uploaded"
+                return [self createSwitchCellWithTitle:@"视频上传日期"
+                                                Detail:@"显示视频上传日期"
                                                    Key:@"video_upload_date"];
             default:
                 break;
@@ -187,20 +187,20 @@
     } else if (indexPath.section == 2) {
         switch (indexPath.row) {
             case 0:
-                return [self createSwitchCellWithTitle:@"Like Confirmation"
-                                                Detail:@"Confirm before liking a video"
+                return [self createSwitchCellWithTitle:@"点赞二次确认"
+                                                Detail:@"点赞视频前需确认"
                                                    Key:@"like_confirm"];
             case 1:
-                return [self createSwitchCellWithTitle:@"Like Comment Confirmation"
-                                                Detail:@"Confirm before liking a comment"
+                return [self createSwitchCellWithTitle:@"赞评论二次确认"
+                                                Detail:@"赞评论前需确认"
                                                    Key:@"like_comment_confirm"];
             case 2:
-                return [self createSwitchCellWithTitle:@"Dislike Comment Confirmation"
-                                                Detail:@"Confirm before disliking a comment"
+                return [self createSwitchCellWithTitle:@"踩评论二次确认"
+                                                Detail:@"点踩评论前需确认"
                                                    Key:@"dislike_comment_confirm"];
             case 3:
-                return [self createSwitchCellWithTitle:@"Follow Confirmation"
-                                                Detail:@"Confirm before following a user"
+                return [self createSwitchCellWithTitle:@"关注二次确认"
+                                                Detail:@"关注用户前需确认"
                                                    Key:@"follow_confirm"];
             default:
                 break;
@@ -208,24 +208,24 @@
     } else if (indexPath.section == 3) {
         switch (indexPath.row) {
             case 0:
-                return [self createSwitchCellWithTitle:@"Always Open Safari"
-                                                Detail:@"Always open links in Safari"
+                return [self createSwitchCellWithTitle:@"用 Safari 打开链接"
+                                                Detail:@"链接始终在 Safari 中打开"
                                                    Key:@"openInBrowser"];
             case 1:
-                return [self createSwitchCellWithTitle:@"Enable Fake Changes"
-                                                Detail:@"Enable fake profile changes"
+                return [self createSwitchCellWithTitle:@"启用伪造数据"
+                                                Detail:@"伪造个人主页数据"
                                                    Key:@"en_fake"];
             case 2: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                 
                 UILabel *followerLabel = [[UILabel alloc] init];
-                followerLabel.text = @"Follower:";
+                followerLabel.text = @"粉丝：";
                 followerLabel.font = [UIFont systemFontOfSize:16];
                 followerLabel.translatesAutoresizingMaskIntoConstraints = NO;
                 [cell.contentView addSubview:followerLabel];
                 
                 UITextField *textField = [[UITextField alloc] init];
-                textField.placeholder = @"Enter follower count";
+                textField.placeholder = @"输入粉丝数";
                 textField.borderStyle = UITextBorderStyleRoundedRect;
                 textField.delegate = self;
                 textField.tag = 2;
@@ -255,13 +255,13 @@
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
                 
                 UILabel *followingLabel = [[UILabel alloc] init];
-                followingLabel.text = @"Following:";
+                followingLabel.text = @"关注：";
                 followingLabel.font = [UIFont systemFontOfSize:16];
                 followingLabel.translatesAutoresizingMaskIntoConstraints = NO;
                 [cell.contentView addSubview:followingLabel];
                 
                 UITextField *textField = [[UITextField alloc] init];
-                textField.placeholder = @"Enter following count";
+                textField.placeholder = @"输入关注数";
                 textField.borderStyle = UITextBorderStyleRoundedRect;
                 textField.delegate = self;
                 textField.tag = 1;
@@ -289,28 +289,28 @@
                 return cell;
             }
             case 4:
-                return [self createSwitchCellWithTitle:@"Fake Verified"
-                                                Detail:@"Make your account appear verified"
+                return [self createSwitchCellWithTitle:@"伪造认证"
+                                                Detail:@"让账号显示认证标识"
                                                    Key:@"fake_verify"];
             case 5:
-                return [self createSwitchCellWithTitle:@"Extended Bio"
-                                                Detail:@"Extend bio section of your profile"
+                return [self createSwitchCellWithTitle:@"扩展简介"
+                                                Detail:@"扩展个人简介显示长度"
                                                    Key:@"extended_bio"];
             case 6:
-                return [self createSwitchCellWithTitle:@"Extended Comments"
-                                                Detail:@"Extend the length of your comments"
+                return [self createSwitchCellWithTitle:@"扩展评论"
+                                                Detail:@"延长评论输入长度"
                                                    Key:@"extendedComment"];
             case 7:
-                return [self createSwitchCellWithTitle:@"Upload HD"
-                                                Detail:@"Upload videos in HD quality"
+                return [self createSwitchCellWithTitle:@"高清上传"
+                                                Detail:@"以高清质量上传视频"
                                                    Key:@"upload_hd"];
             case 8:
-                return [self createSwitchCellWithTitle:@"App Lock"
-                                                Detail:@"Lock the app with a passcode"
+                return [self createSwitchCellWithTitle:@"应用锁"
+                                                Detail:@"使用密码锁定应用"
                                                    Key:@"padlock"];
             case 9:
-                return [self createSwitchCellWithTitle:@"Enable Flex"
-                                                Detail:@"Developers Only, DON'T touch it if you don't know what you are doing."
+                return [self createSwitchCellWithTitle:@"启用 Flex 调试器"
+                                                Detail:@"仅供开发者使用，不了解请勿修改。"
                                                    Key:@"flex_enebaled"];
             default:
                 break;
@@ -318,13 +318,13 @@
     } else if (indexPath.section == 4) {
         switch (indexPath.row) {
             case 0:
-                return [self createSwitchCellWithTitle:@"Enable Region Changing"
-                                                Detail:@"Enable region changing functionality"
+                return [self createSwitchCellWithTitle:@"启用换区"
+                                                Detail:@"启用地区切换功能"
                                                    Key:@"en_region"];
             case 1: {
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 UITableViewCell *regions = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-                regions.textLabel.text = @"Regions";
+                regions.textLabel.text = @"切换地区";
                 NSDictionary *selectedRegion = [defaults dictionaryForKey:@"region"];
                 regions.detailTextLabel.text = [NSString stringWithFormat:@"%@", selectedRegion[@"area"]];
                 return regions;
@@ -335,15 +335,15 @@
     } else if (indexPath.section == 5) {
         switch (indexPath.row) {
             case 0:
-                return [self createSwitchCellWithTitle:@"Live Button Action"
-                                                Detail:@"Change The Default Live Button Action"
+                return [self createSwitchCellWithTitle:@"直播按钮功能"
+                                                Detail:@"更改直播按钮的默认行为"
                                                    Key:@"en_livefunc"];
             case 1: {
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 UITableViewCell *liveAction = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-                liveAction.textLabel.text = @"Actions";
+                liveAction.textLabel.text = @"功能";
                 NSString *selectedLiveAction = [defaults valueForKey:@"live_action"];
-                NSArray *liveFuncTitles = @[@"Default", @"BHTikTok++ Settings", @"Playback Speed"];
+                NSArray *liveFuncTitles = @[@"默认", @"BHTikTok++ 设置", @"倍速播放"];
                 if (selectedLiveAction != nil) {
                     liveAction.detailTextLabel.text = [NSString stringWithFormat:@"%@", [liveFuncTitles objectAtIndex:[selectedLiveAction integerValue]]];
                 }
@@ -357,13 +357,13 @@
     } else if (indexPath.section == 6) {
         switch (indexPath.row) {
             case 0: {
-                return [self createSwitchCellWithTitle:@"Playback Speed"
-                                                Detail:@"Enable Presistent Playback Speed."
+                return [self createSwitchCellWithTitle:@"倍速播放"
+                                                Detail:@"持久化播放倍速。"
                                                    Key:@"playback_en"];
             }
             case 1: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-                cell.textLabel.text = @"Speeds";
+                cell.textLabel.text = @"倍速";
                 
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 NSString *selectedSpeed = [defaults valueForKey:@"playback_speed"];
@@ -380,7 +380,7 @@
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
                 cell.textLabel.text = @"Raul Saeed";
                 cell.textLabel.textColor = [UIColor systemBlueColor];
-                cell.detailTextLabel.text = @"Github Page";
+                cell.detailTextLabel.text = @"GitHub 主页";
                 cell.imageView.image = [UIImage systemImageNamed:@"link"];
                 cell.detailTextLabel.textColor = [UIColor systemGrayColor];
                 return cell;
@@ -389,16 +389,16 @@
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
                 cell.textLabel.text = @"Raul Saeed";
                 cell.textLabel.textColor = [UIColor systemBlueColor];
-                cell.detailTextLabel.text = @"X Page";
+                cell.detailTextLabel.text = @"X 主页";
                 cell.imageView.image = [UIImage systemImageNamed:@"link"];
                 cell.detailTextLabel.textColor = [UIColor systemGrayColor];
                 return cell;
             }
             case 2: {
                 UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-                cell.textLabel.text = @"Buy Me A Coffe";
+                cell.textLabel.text = @"请我喝杯咖啡";
                 cell.textLabel.textColor = [UIColor systemBlueColor];
-                cell.detailTextLabel.text = @"To keep me Motivated and the Tweak Updated.";
+                cell.detailTextLabel.text = @"你的支持是我持续更新插件的动力。";
                 cell.imageView.tintColor = [UIColor orangeColor];
                 cell.detailTextLabel.textColor = [UIColor systemGrayColor];
                 cell.imageView.image = [UIImage systemImageNamed:@"mug.fill"];

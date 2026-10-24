@@ -12,8 +12,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Live Button Actions";
-    self.liveFuncTitles = @[@"Default", @"BHTikTok++ Settings", @"Playback Speed"];
+    self.title = @"直播按钮功能";
+    self.liveFuncTitles = @[@"默认", @"BHTikTok++ 设置", @"倍速播放"];
     self.liveFuncValues = @[@0, @1, @2];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -57,7 +57,7 @@
     [defaults setValue:self.liveFuncValues[indexPath.row] forKey:@"live_action"];
     [defaults synchronize];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Live Option Selected" message:[NSString stringWithFormat:@"You selected: %@", self.liveFuncTitles[indexPath.row]]
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"直播按钮功能已选择" message:[NSString stringWithFormat:@"已选择：%@", self.liveFuncTitles[indexPath.row]]
                                                             preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:okAction];
