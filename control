@@ -1,0 +1,9 @@
+Package: com.pwremilk.bhtiktokpp
+Name: BHTikTok++ (roothide)
+Version: 1.6
+Architecture: iphoneos-arm64
+Maintainer: pwremilk
+Author: raul saeed (ported)
+Depends: mobilesubstrate
+Description: TikTok tweak suite (no-ads, download, region...) rebuilt from upstream source for modern TikTok 47.x, roothide scheme. Settings page entry preserved.
+Section: Tweaks
